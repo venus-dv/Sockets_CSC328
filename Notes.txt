@@ -1,0 +1,25 @@
+For killing hanging processes on the acad server vvv
+ps aux | grep vvel  ---> kill <process id>
+
+./server 12345 & <--- to start a server
+*look up how to put server in the background with bg
+
+if server bound already then must use a different port
+- use a 5 digit number not bigger than 65536
+
+- look up man socket and man connect
+- print out words until there arent any more packets
+- word packet
+    - size is 2 bytes big endian | x00 x05 H E L L O |
+    - read in two bytes, turn that into an integer and then read that many more bytes
+
+- Our machine most likely runs little endian so must pay attention 
+
+*** ERROR CHECK YOU ARE GETTING CORRECT BYTES ***
+
+- Zero indicates end of file in read() and recv()
+
+- make a function for decoding bytes
+- using socket() protocol is 0 
+
+- make a socket, connect the socket, read from the socket, close the socket (close() and error check)
