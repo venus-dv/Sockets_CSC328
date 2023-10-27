@@ -16,8 +16,14 @@ def bytes_to_int():
     # bytes
     byte_data = b'\x01\x02'
 
-    # unpack the bytes as an integer
-    integer = struct.unpack('>H', byte_data)[0]
+    if len(byte_data) == 2:
+        try:
+            # unpack the bytes as an integer
+            integer = struct.unpack('>H', byte_data)[0]
+        except:
+            print("Error: Unable to unpack bytes.")
+    else:
+        print("Error: Byte data size does not match expected size.")
 
     return integer
 
