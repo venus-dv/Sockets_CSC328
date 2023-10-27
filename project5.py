@@ -9,6 +9,7 @@
 
 import struct
 import sys
+import socket
 
 # Description: 
 # Parameters:  
@@ -19,6 +20,14 @@ def accept_args():
     for arg in args:
         # do something here with the args
         print("Argument:", arg )
+
+# Description: 
+# Parameters:  
+# Returns:  
+def connect_socket(host, port):
+    # creation & connection of socket
+    socket = socket.create_connection(host, port)
+
 
 # Description: Converts 2 bytes to an integer
 # Parameters:  n/a
