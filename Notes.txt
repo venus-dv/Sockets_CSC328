@@ -4,6 +4,12 @@ ps aux | grep vvel  ---> kill <process id>
 ./server 12345 & <--- to start a server
 *look up how to put server in the background with bg
 
+1. accept two command line arguments: host and port in that order.
+2. create a socket
+3. connect the socket to the server
+4.  read word packets until the server closes the connection. for each word packet print the associated string to standard out followed by a newline.
+5. close the socket file descriptor
+
 if server bound already then must use a different port
 - use a 5 digit number not bigger than 65536
 

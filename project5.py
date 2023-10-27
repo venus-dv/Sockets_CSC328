@@ -8,6 +8,18 @@
 #	Purpose: 	This client program reads word data from a server
 
 import struct
+import sys
+
+# Description: 
+# Parameters:  
+# Returns:      
+def accept_args():
+    # args will be <host> <port>
+    args = sys.argv[1:]
+    for arg in args:
+        # do something here with the args
+        print("Argument:", arg )
+        
 
 # Description: Converts 2 bytes to an integer
 # Parameters:  n/a
