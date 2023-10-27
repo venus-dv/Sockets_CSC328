@@ -9,11 +9,19 @@
 
 import struct
 
-# Description: 
-# Parameters:  
-# Returns:     
+# Description: Converts 2 bytes to an integer
+# Parameters:  n/a
+# Returns:     int - the converted integer  
+def bytes_to_int():
+    # bytes
+    byte_data = b'\x01\x02'
 
+    # unpack the bytes as an integer
+    integer = struct.unpack('>H', byte_data)[0]
+
+    return integer
 
 
 if __name__ == "__main__":
-    print(integer)
+    print(bytes_to_int())
+    
