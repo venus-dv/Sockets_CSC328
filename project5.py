@@ -19,7 +19,6 @@ def accept_args():
     for arg in args:
         # do something here with the args
         print("Argument:", arg )
-        
 
 # Description: Converts 2 bytes to an integer
 # Parameters:  n/a
@@ -32,10 +31,12 @@ def bytes_to_int():
         try:
             # unpack the bytes as an integer
             integer = struct.unpack('>H', byte_data)[0]
-        except:
-            print("Error: Unable to unpack bytes.")
+        except struct.error as e :
+            print("Error trying to unpack bytes:", e.strerror)
+            sys.exit(-1)
     else:
         print("Error: Byte data size does not match expected size.")
+        sys.exit(-1)
 
     return integer
 
