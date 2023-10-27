@@ -14,7 +14,7 @@ OUTPUT_FILE = client
 all: client
 
 client: project5.py
-	$(PYTHON) project5.py
+	$(PYTHON) project5.py > client
 	chmod u+x client
 
 .PHONY: clean submit
