@@ -9,24 +9,48 @@
 
 import struct
 import sys
-import socket
 
 # Description: 
 # Parameters:  
-# Returns:      
-def accept_args():
+# Returns: 
+def check_args():
+    # check for number of arguments
+    num_args = len(sys.argv)
+
     # args will be <host> <port>
-    args = sys.argv[1:]
-    for arg in args:
-        # do something here with the args
-        print("Argument:", arg )
+    if num_args == 3:
+
+        host = sys.argv[1]
+        port = sys.argv[2]
+
+        if not isinstance(host, str): 
+            print("Error: expected string for <host>")
+            sys.exit(-1)
+
+        if not port.isdigit():
+            print("Error: expected integer for <port>")
+            sys.exit(-1)
+        else:
+            port = int(port)
+
+        if port < 10000 or port > 65535:
+            print("Error: expected <port> from 10000 to 65535")
+            sys.exit(-1)
+    else:
+        print("Error: expected 2 arguments\n")
+        print("Usage: script <host> <port>")
+        sys.exit(-1)
+
+    return (host, port)
 
 # Description: 
 # Parameters:  
 # Returns:  
-def connect_socket(host, port):
-    # creation & connection of socket
-    socket = socket.create_connection(host, port)
+# def conn_socket(host, port):
+#     # host and port
+#     host = 
+#     # creation & connection of socket
+#     socket = socket.create_connection(host, port)
 
 
 # Description: Converts 2 bytes to an integer
@@ -41,7 +65,7 @@ def bytes_to_int():
             # unpack the bytes as an integer
             integer = struct.unpack('>H', byte_data)[0]
         except struct.error as e :
-            print("Error trying to unpack bytes:", e.strerror)
+            print("Error trying to unpack bytes: ", e.strerror)
             sys.exit(-1)
     else:
         print("Error: Byte data size does not match expected size.")
@@ -51,5 +75,8 @@ def bytes_to_int():
 
 
 if __name__ == "__main__":
+
+    conn_data = check_args()
+    # conn_socket(conn_data[1], conn_data[2])
     print(bytes_to_int())
     
