@@ -34,9 +34,9 @@ def check_args():
         else:
             port = int(port)
 
-        if port < 10000 or port > 65535:
-            print("Error: expected <port> from 10000 to 65535")
-            sys.exit(-1)
+        # if port < 10000 or port > 65535:
+        #     print("Error: expected <port> from 10000 to 65535")
+        #     sys.exit(-1)
     else:
         print("Error: expected 2 arguments\n")
         print("Usage: script <host> <port>")
@@ -50,17 +50,21 @@ def check_args():
 def conn_socket(host, port):
 
     try:
-        # client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        # client_socket.connect((host, port))
         # creation & connection of socket
-        client_socket = socket.create_connection(host, port)
+        client_socket = socket.create_connection((host, port))
         print("Socket connection successful\n")
+        print("Local address: ", client_socket.getsockname())
+        print("Remote address: ", client_socket.getpeername())
+
+        # return socket object
         return (client_socket)
     
     except socket.error as e:
         print("Socket error: ", e)
+        sys.exit(-1)
     except Exception as err:
         print("An error occurred: ", err)
+        sys.exit(-1)
 
 
 # Description: Converts 2 bytes to an integer
@@ -89,12 +93,16 @@ if __name__ == "__main__":
     # host and port 
     conn_data = check_args()
 
+    print("Arguments: ", conn_data[0], conn_data[1])
+
     # socket connected to server
     client_socket = conn_socket(conn_data[0], conn_data[1])
 
-    #
-    print("Local address: ", client_socket.getsockname())
-    # print("Remote address: ", client_socket.getpeername())
-    client_socket.close()
+    if client_socket:
+        client_socket.send(b'\x01\x02')
+        data = client_socket.recv(1024)
+
+        client_socket.close()
+
     print(bytes_to_int())
     
