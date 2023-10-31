@@ -91,13 +91,13 @@ def bytes_to_int(byte_data):
 # Parameters:  
 # Returns: 
 def read_word_packets(client_socket):
-    data = None
+    data = ""
     while True:
         data += client_socket.recv(1024)
         if not data:
             break
         print("Received: ", data)
-    if data != None:   
+    if len(data) != 0:   
         print(bytes_to_int(data[:2]))
 
 
