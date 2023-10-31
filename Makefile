@@ -16,12 +16,9 @@
 PYTHON_FILE = project5.py
 OUTPUT_FILE = client
 
-client:
-	python --onefile $(PYTHON_FILE) --name $(OUTPUT_FILE)
-
-# client:
-# 	$(PYTHON) project5.py
-# 	chmod u+x client
+client: project5.py
+	python ./project5.py > $(OUTPUT_FILE)
+	chmod u+x client
 
 .PHONY: clean submit
 clean:
