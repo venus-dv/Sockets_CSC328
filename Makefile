@@ -15,7 +15,6 @@ client: project5.py
 
 .PHONY: clean submit
 clean:
-	rm -rf __pycache__
 	rm -f client
 submit:
 	~schwesin/bin/submit csc328 project5
