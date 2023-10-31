@@ -53,8 +53,6 @@ def conn_socket(host, port):
         # creation & connection of socket
         client_socket = socket.create_connection((host, port))
         print("Socket connection successful\n")
-        print("Local address: ", client_socket.getsockname())
-        print("Remote address: ", client_socket.getpeername())
 
         # return socket object
         return (client_socket)
@@ -97,8 +95,7 @@ def read_word_packets(client_socket):
         if len(temp) == 0:
             break
         data += temp
-        print("Received: ", data)
-    
+
     return(data)
 
 # Description: 
@@ -127,8 +124,6 @@ if __name__ == "__main__":
     # host and port 
     conn_data = check_args()
 
-    print("Arguments: ", conn_data[0], conn_data[1])
-
     # socket connected to server
     client_socket = conn_socket(conn_data[0], conn_data[1])
 
@@ -137,9 +132,4 @@ if __name__ == "__main__":
     print_words(words)
 
     if client_socket:
-        # client_socket.send(b'\x01\x02')
-        # data = client_socket.recv(1024)
         client_socket.close()
-
-    print(bytes_to_int())
-    
