@@ -50,10 +50,10 @@ def check_args():
 def conn_socket(host, port):
 
     try:
-        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        client_socket.connect((host, port))
+        # client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # client_socket.connect((host, port))
         # creation & connection of socket
-        # client_socket = socket.create_connection(host, port)
+        client_socket = socket.create_connection(host, port)
         print("Socket connection successful\n")
         return (client_socket)
     
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     client_socket = conn_socket(conn_data[0], conn_data[1])
 
     #
-    # print("Local address: ", client_socket.getsockname())
+    print("Local address: ", client_socket.getsockname())
     # print("Remote address: ", client_socket.getpeername())
     client_socket.close()
     print(bytes_to_int())

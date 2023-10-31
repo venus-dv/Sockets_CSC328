@@ -13,8 +13,8 @@ OUTPUT_FILE = client
 # default target
 all: client
 
-client: project5.py
-	$(PYTHON) project5.py > client
+client:
+	$(PYTHON) project5.py
 	chmod u+x client
 
 .PHONY: clean submit
