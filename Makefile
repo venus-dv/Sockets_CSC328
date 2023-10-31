@@ -11,7 +11,6 @@ all: client
 
 client: project5.py
 	python ./project5.py > client
-	chmod u+x client
 
 .PHONY: clean submit
 clean:
