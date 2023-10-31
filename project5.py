@@ -95,7 +95,7 @@ def read_word_packets(client_socket):
         data = client_socket.recv(1024)
         if not data:
             break
-        print("Received: ", data, "\n")
+        print("Received: ", data, end = "\n")
 
 
 if __name__ == "__main__":
