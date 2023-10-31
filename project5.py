@@ -98,9 +98,22 @@ def read_word_packets(client_socket):
             break
         data += temp
         print("Received: ", data)
-    if len(data) != 0:   
-        print(bytes_to_int(data[:2]))
+    if len(data) != 0:
+        parse_packet(data)    
 
+# Description: 
+# Parameters:  
+# Returns: 
+def parse_packet(data):
+    all_words = []
+    curr_byte = 0
+    while curr_byte < len(data):
+        byte_len = bytes_to_int(data[curr_byte:curr_byte + 2])
+        curr_byte += 2
+        all_words.append(data[curr_byte:curr_byte + byte_len])
+        curr_byte += byte_len
+    
+    print(all_words)
 
 if __name__ == "__main__":
 
