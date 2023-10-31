@@ -17,7 +17,7 @@ PYTHON_FILE = project5.py
 OUTPUT_FILE = client
 
 client:
-	pyinstaller --onefile $(PYTHON_FILE) --name $(OUTPUT_FILE)
+	python --onefile $(PYTHON_FILE) --name $(OUTPUT_FILE)
 
 # client:
 # 	$(PYTHON) project5.py
