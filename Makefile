@@ -10,7 +10,7 @@
 all: client
 
 client: project5.py
-	python $< > $@
+	python2.7 $< > $@
 	chmod +x $@
 
 .PHONY: clean submit
