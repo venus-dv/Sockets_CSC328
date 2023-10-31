@@ -70,9 +70,9 @@ def conn_socket(host, port):
 # Description: Converts 2 bytes to an integer
 # Parameters:  n/a
 # Returns:     int - the converted integer  
-def bytes_to_int():
+def bytes_to_int(byte_data):
     # bytes
-    byte_data = b'\x01\x02'
+    # byte_data = b'\x01\x02'
 
     if len(byte_data) == 2:
         try:
@@ -95,7 +95,9 @@ def read_word_packets(client_socket):
         data = client_socket.recv(1024)
         if not data:
             break
-        print("Received: ", data, end = "\n")
+        print("Received: ", data, " ", data[:4])
+
+        print(bytes_to_int(data[:4]))
 
 
 if __name__ == "__main__":
