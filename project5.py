@@ -11,10 +11,11 @@ import struct
 import sys
 import socket
 
-# Description: 
-# Parameters:  
-# Returns: 
+# Description: Checks for command line arguments 
+# Parameters:  N/A
+# Returns:     str - host server, int - port number
 def check_args():
+
     # check for number of arguments
     num_args = len(sys.argv)
 
@@ -34,9 +35,9 @@ def check_args():
         else:
             port = int(port)
 
-        # if port < 10000 or port > 65535:
-        #     print("Error: expected <port> from 10000 to 65535")
-        #     sys.exit(-1)
+        if port < 10000 or port > 65535:
+            print("Error: expected <port> from 10000 to 65535")
+            sys.exit(-1)
     else:
         print("Error: expected 2 arguments\n")
         print("Usage: script <host> <port>")
@@ -44,15 +45,15 @@ def check_args():
 
     return (host, port)
 
-# Description: 
-# Parameters:  
-# Returns:  
+# Description: Creates socket and connects to host and port
+# Parameters:  str host - host name to connect
+#              int port - port  number to connect
+# Returns:     socket object - socket object that will receive packets
 def conn_socket(host, port):
 
     try:
         # creation & connection of socket
         client_socket = socket.create_connection((host, port))
-        print("Socket connection successful\n")
 
         # return socket object
         return (client_socket)
@@ -65,12 +66,10 @@ def conn_socket(host, port):
         sys.exit(-1)
 
 
-# Description: Converts 2 bytes to an integer
-# Parameters:  n/a
+# Description: Converts 2 bytes in front of each word to an integer
+# Parameters:  int byte_data - number of bytes to grab
 # Returns:     int - the converted integer  
 def bytes_to_int(byte_data):
-    # bytes
-    # byte_data = b'\x01\x02'
 
     if len(byte_data) == 2:
         try:
@@ -83,27 +82,36 @@ def bytes_to_int(byte_data):
         print("Error: Byte data size does not match expected size.")
         sys.exit(-1)
 
-    return integer
+    return(integer)
 
-# Description: 
-# Parameters:  
-# Returns: 
+# Description: Reads word packets sent from server
+# Parameters:  socket object client_socket - the client receiving the word packets
+# Returns:     str - the entire string containing all the words and bytes
 def read_word_packets(client_socket):
+
     data = ""
+
     while True:
-        temp = client_socket.recv(1024)
+        try:
+            temp = client_socket.recv(1024)
+        except socket.error as e:
+            print("Error receiving data: ", e)
+            sys.exit(-1)
         if len(temp) == 0:
             break
+
         data += temp
 
     return(data)
 
-# Description: 
-# Parameters:  
-# Returns: 
+# Description: Parses the packets received
+# Parameters:  str data - the entire string of bytes and words
+# Returns:     array - all words parsed from the packets
 def parse_packet(data):
+
     all_words = []
     curr_byte = 0
+
     while curr_byte < len(data):
         byte_len = bytes_to_int(data[curr_byte:curr_byte + 2])
         curr_byte += 2
@@ -112,13 +120,14 @@ def parse_packet(data):
     
     return(all_words)
 
-# Description: 
-# Parameters:  
-# Returns: 
+# Description: Formats each word to print on a new line
+# Parameters:  array words - the array holding all the words from the packets
+# Returns:     N/A
 def print_words(words):
+
     for word in words:
         print(word)
-
+    
 if __name__ == "__main__":
 
     # host and port 
@@ -132,4 +141,8 @@ if __name__ == "__main__":
     print_words(words)
 
     if client_socket:
-        client_socket.close()
+        try:
+            client_socket.close()
+        except IOError as e:
+            print("An error occurred trying to close the socket: ", e)
+            sys.exit(-1)
