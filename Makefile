@@ -7,19 +7,25 @@
 #	Purpose:    Creates executable for project5 and cleans up artifacts
 
 # interpreter
-PYTHON = python
+# PYTHON = python
 # output file name
-OUTPUT_FILE = client
+# OUTPUT_FILE = client
 # default target
-all: client
+# all: client
+
+PYTHON_FILE = project5.py
+OUTPUT_FILE = client
 
 client:
-	$(PYTHON) project5.py
-	chmod u+x client
+	pyinstaller --onefile $(PYTHON_FILE) --name $(OUTPUT_FILE)
+
+# client:
+# 	$(PYTHON) project5.py
+# 	chmod u+x client
 
 .PHONY: clean submit
 clean:
 	rm -rf __pycache__
-	rm -f client
+	rm -f $(OUTPUT_FILE)
 submit:
 	~schwesin/bin/submit csc328 project5
