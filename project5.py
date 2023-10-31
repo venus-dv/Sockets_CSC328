@@ -87,6 +87,16 @@ def bytes_to_int():
 
     return integer
 
+# Description: 
+# Parameters:  
+# Returns: 
+def read_word_packets(client_socket):
+    while True:
+        data = client_socket.recv(1024)
+        if not data:
+            break
+        print("Received: ", data)
+
 
 if __name__ == "__main__":
 
@@ -98,10 +108,11 @@ if __name__ == "__main__":
     # socket connected to server
     client_socket = conn_socket(conn_data[0], conn_data[1])
 
-    if client_socket:
-        client_socket.send(b'\x01\x02')
-        data = client_socket.recv(1024)
+    read_word_packets(client_socket)
 
+    if client_socket:
+        # client_socket.send(b'\x01\x02')
+        # data = client_socket.recv(1024)
         client_socket.close()
 
     print(bytes_to_int())
