@@ -9,6 +9,7 @@
 
 import struct
 import sys
+import socket
 
 # Description: 
 # Parameters:  
@@ -46,11 +47,20 @@ def check_args():
 # Description: 
 # Parameters:  
 # Returns:  
-# def conn_socket(host, port):
-#     # host and port
-#     host = 
-#     # creation & connection of socket
-#     socket = socket.create_connection(host, port)
+def conn_socket(host, port):
+
+    try:
+        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        client_socket.connect((host, port))
+        # creation & connection of socket
+        # client_socket = socket.create_connection(host, port)
+        print("Socket connection successful\n")
+        return (client_socket)
+    
+    except socket.error as e:
+        print("Socket error: ", e)
+    except Exception as err:
+        print("An error occurred: ", err)
 
 
 # Description: Converts 2 bytes to an integer
@@ -76,7 +86,15 @@ def bytes_to_int():
 
 if __name__ == "__main__":
 
+    # host and port 
     conn_data = check_args()
-    # conn_socket(conn_data[1], conn_data[2])
+
+    # socket connected to server
+    client_socket = conn_socket(conn_data[0], conn_data[1])
+
+    #
+    print("Local address: ", client_socket.getsockname())
+    print("Remote address: ", client_socket.getpeername())
+    client_socket.close()
     print(bytes_to_int())
     
