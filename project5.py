@@ -93,8 +93,8 @@ if __name__ == "__main__":
     client_socket = conn_socket(conn_data[0], conn_data[1])
 
     #
-    print("Local address: ", client_socket.getsockname())
-    print("Remote address: ", client_socket.getpeername())
+    # print("Local address: ", client_socket.getsockname())
+    # print("Remote address: ", client_socket.getpeername())
     client_socket.close()
     print(bytes_to_int())
     
