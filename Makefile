@@ -6,23 +6,16 @@
 #	Filename:   Makefile
 #	Purpose:    Creates executable for project5 and cleans up artifacts
 
-# interpreter
-# PYTHON = python
-# output file name
-# OUTPUT_FILE = client
 # default target
-# all: client
-
-PYTHON_FILE = project5.py
-OUTPUT_FILE = client
+all: client
 
 client: project5.py
-	python ./project5.py > $(OUTPUT_FILE)
+	python ./project5.py > client
 	chmod u+x client
 
 .PHONY: clean submit
 clean:
 	rm -rf __pycache__
-	rm -f $(OUTPUT_FILE)
+	rm -f client
 submit:
 	~schwesin/bin/submit csc328 project5
