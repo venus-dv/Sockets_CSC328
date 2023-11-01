@@ -10,8 +10,8 @@
 all: client
 
 client: project5.py
-	python2.7 $< > $@
-	chmod +x $@
+	cp project5.py client
+	chmod +x client 
 
 .PHONY: clean submit
 clean:
