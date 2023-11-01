@@ -10,7 +10,7 @@
 all: client
 
 client: project5.py
-	cp project5.py client
+	python project5.py
 	chmod +x client 
 
 .PHONY: clean submit

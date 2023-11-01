@@ -39,8 +39,7 @@ def check_args():
             print("Error: expected <port> from 10000 to 65535")
             sys.exit(-1)
     else:
-        print("Error: expected 2 arguments")
-        print("Usage: script <host> <port>")
+        print("Usage: ./client <host> <port>")
         sys.exit(-1)
 
     return (host, port)
