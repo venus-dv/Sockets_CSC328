@@ -10,8 +10,9 @@
 all: client
 
 client: project5.py
-	python project5.py
-	chmod +x client 
+	@touch client
+	@echo 'python project5.py "$$@"' > ./client
+	@chmod u+x client
 
 .PHONY: clean submit
 clean:
