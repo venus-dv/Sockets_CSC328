@@ -12,10 +12,11 @@ all: client
 client: project5.py
 	@touch client
 	@echo 'python project5.py "$$@"' > ./client
-	@chmod u+x client
+	@chmod a+x client
 
 .PHONY: clean submit
 clean:
 	rm -f client
+	rm -rf __pycache__
 submit:
 	~schwesin/bin/submit csc328 project5
